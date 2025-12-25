@@ -1,0 +1,661 @@
+{
+    "login": {
+        "title": "健身俱乐部",
+        "subtitle": "欢迎回来！请登录您的账户。",
+        "role": {
+            "member": "会员",
+            "coach": "教练",
+            "admin": "管理员"
+        },
+        "username": "用户名",
+        "password": "密码",
+        "placeholder": {
+            "username": "请输入用户名",
+            "password": "请输入密码"
+        },
+        "button": {
+            "login": "登录",
+            "loggingIn": "登录中..."
+        },
+        "error": {
+            "failed": "登录失败",
+            "generic": "登录过程中发生错误"
+        }
+    },
+    "common": {
+        "loading": "正在加载教练信息...",
+        "specialty": "专长",
+        "experience": "经验",
+        "years": "{n} 年",
+        "hourlyRate": "时薪",
+        "book": "立即预约",
+        "viewProfile": "查看详情",
+        "contact": "联系方式",
+        "certificate": "证书",
+        "introduction": "个人简介",
+        "booked": "已预约",
+        "error": "发生错误",
+        "close": "关闭",
+        "cancel": "取消",
+        "confirm": "确认",
+        "save": "保存",
+        "delete": "删除",
+        "edit": "编辑",
+        "search": "搜索",
+        "alert": "提示",
+        "success": "成功",
+        "actions": "操作",
+        "gender": {
+            "male": "男",
+            "female": "女"
+        }
+    },
+    "dashboard": {
+        "welcome": "欢迎回来，{name}！",
+        "role": "角色",
+        "myMembership": "我的会员卡",
+        "loading": "加载中...",
+        "noValidCard": "暂无有效会员卡。",
+        "getMembership": "购买会员",
+        "validUntil": "有效期至：{date}",
+        "active": "有效",
+        "clickDetails": "点击查看详情",
+        "pay": "充值/支付",
+        "upcomingClasses": "即将开始的课程",
+        "noClasses": "暂无即将开始的课程。",
+        "bookClass": "预约课程",
+        "viewAll": "查看全部",
+        "quickActions": "快捷操作",
+        "browseCourses": "浏览课程",
+        "findCoach": "寻找教练",
+        "attendance": "考勤签到",
+        "checkedInAt": "签到时间：{time}",
+        "checkOut": "签退",
+        "ready": "准备好锻炼了吗？",
+        "checkIn": "立即签到",
+        "viewHistory": "查看历史",
+        "selectPlan": "选择会员计划",
+        "payTitle": "会员卡支付",
+        "enterAmount": "请输入支付金额：",
+        "amountPlaceholder": "金额",
+        "detailsTitle": "会员卡详情",
+        "cardType": "卡种",
+        "cardNo": "卡号",
+        "remainingDays": "剩余天数",
+        "startDate": "开始日期",
+        "endDate": "结束日期",
+        "totalValue": "总价值",
+        "paidAmount": "已付金额",
+        "paymentStatus": "支付状态",
+        "paid": "已支付",
+        "unpaid": "未支付/部分支付",
+        "close": "关闭"
+    },
+    "nav": {
+        "dashboard": "仪表盘",
+        "courses": "课程列表",
+        "coaches": "教练列表",
+        "myBookings": "我的预约",
+        "membership": "会员卡",
+        "attendance": "签到记录",
+        "payments": "支付记录",
+        "myStudents": "我的学员",
+        "mySchedule": "我的日程",
+        "members": "会员管理",
+        "programs": "课程管理",
+        "cardInfo": "卡种管理",
+        "facilities": "设施管理",
+        "logout": "退出登录"
+    },
+    "myCourse": {
+        "title": "我的预约",
+        "loading": "加载预约中...",
+        "empty": "您还没有预约任何课程。",
+        "status": "状态",
+        "created": "创建时间",
+        "checkIn": "签到",
+        "checkedIn": "已签到",
+        "cancel": "取消预约",
+        "cancelSuccess": "预约取消成功。",
+        "cancelFail": "取消预约失败。",
+        "checkInSuccess": "签到成功！祝您锻炼愉快。",
+        "checkInFail": "签到失败。",
+        "bookingStatus": {
+            "pending": "待确认",
+            "confirmed": "已确认",
+            "cancelled": "已取消",
+            "completed": "已完成",
+            "expired": "已过期",
+            "unknown": "未知"
+        }
+    },
+    "programs": {
+        "title": "健身课程",
+        "loading": "加载课程中...",
+        "coach": "教练",
+        "unknownCoach": "未知教练",
+        "price": "价格",
+        "duration": "时长",
+        "minutes": "分钟",
+        "book": "立即预约",
+        "full": "已满员",
+        "open": "开放预约",
+        "type": {
+            "group": "团课",
+            "personal": "私教"
+        },
+        "modal": {
+            "title": "预约 \"{name}\"",
+            "prompt": "请选择预约时间：",
+            "confirm": "确认预约",
+            "success": "预约创建成功！",
+            "fail": "预约失败。",
+            "dateReq": "请选择日期和时间。"
+        }
+    },
+    "membership": {
+        "title": "会员卡管理",
+        "myCards": "我的会员卡",
+        "loadingCards": "加载会员卡中...",
+        "noCards": "您还没有会员卡。",
+        "buyNew": "购买新卡",
+        "loadingTypes": "加载卡种选项...",
+        "cardNo": "卡号",
+        "valid": "有效期",
+        "to": "至",
+        "remaining": "剩余",
+        "days": "天",
+        "unpaid": "未支付",
+        "payNow": "立即支付",
+        "purchase": "购买",
+        "confirmPurchase": "确认以 ${price} 购买 {name} 吗？",
+        "created": "会员卡创建成功！请支付以激活。",
+        "payPrompt": "请输入支付金额 (剩余: {remaining})",
+        "invalidAmount": "无效金额。",
+        "exceedAmount": "金额不能超过剩余余额 ({remaining})。",
+        "paySuccess": "支付成功！",
+        "payFail": "支付失败。",
+        "status": {
+            "invalid": "无效",
+            "active": "有效",
+            "expired": "已过期",
+            "lost": "挂失",
+            "unknown": "未知"
+        }
+    },
+    "payment": {
+        "title": "支付记录",
+        "totalSpent": "总消费",
+        "loading": "加载支付记录中...",
+        "empty": "暂无支付记录。",
+        "orderNo": "订单号",
+        "type": "类型",
+        "amount": "金额",
+        "method": "支付方式",
+        "date": "日期",
+        "status": "状态",
+        "types": {
+            "membership": "会员卡",
+            "course": "课程",
+            "coach": "私教",
+            "other": "其他"
+        },
+        "methods": {
+            "wechat": "微信",
+            "alipay": "支付宝",
+            "cash": "现金",
+            "bank": "银行卡",
+            "unknown": "未知"
+        },
+        "statusText": {
+            "pending": "待支付",
+            "success": "成功",
+            "failed": "失败",
+            "refunded": "已退款",
+            "unknown": "未知"
+        }
+    },
+    "attendance": {
+        "title": "考勤记录",
+        "loading": "加载考勤中...",
+        "empty": "暂无考勤记录。今天就开始锻炼吧！",
+        "date": "日期",
+        "checkIn": "签到时间",
+        "checkOut": "签退时间",
+        "duration": "时长 (分钟)",
+        "ongoing": "进行中",
+        "inProgress": "锻炼中"
+    },
+    "coach": {
+        "title": "我们的教练",
+        "loading": "正在加载教练信息...",
+        "status": {
+            "available": "空闲",
+            "busy": "忙碌"
+        },
+        "exp": "年经验",
+        "specialty": "专长",
+        "experience": "从业经验",
+        "hourlyRate": "课时费",
+        "certificate": "证书",
+        "about": "关于教练",
+        "coursesTaught": "教授课程",
+        "noCourses": "暂无课程",
+        "noDesc": "暂无详细介绍",
+        "general": "全能教练"
+    },
+    "coachDashboard": {
+        "welcome": "欢迎，{name}教练！",
+        "subtitle": "高效管理您的课程和学员。",
+        "upcoming": "即将开始",
+        "students": "学员",
+        "completed": "已完成",
+        "revenue": "收入",
+        "todaysClasses": "今日课程",
+        "loading": "加载中...",
+        "noClasses": "今日无课程。",
+        "viewSchedule": "查看完整日程",
+        "trainingSession": "训练课程",
+        "min": "分钟"
+    },
+    "coachSchedule": {
+        "title": "我的日程",
+        "upcoming": "即将开始",
+        "history": "历史记录",
+        "loading": "加载日程中...",
+        "empty": "暂无{tab}课程。",
+        "confirm": "确认",
+        "confirmPrompt": "确认此预约吗？",
+        "confirmFail": "确认预约失败。",
+        "memberId": "会员 ID",
+        "tabs": {
+            "upcoming": "即将开始",
+            "history": "历史记录"
+        }
+    },
+    "myStudents": {
+        "title": "我的学员",
+        "loading": "加载学员中...",
+        "empty": "您暂时还没有学员。",
+        "noPhone": "无电话",
+        "viewHistory": "查看历史",
+        "historyTitle": "训练记录：{name}",
+        "noHistory": "暂无训练记录。",
+        "close": "关闭"
+    },
+    "adminDashboard": {
+        "title": "运营概览",
+        "totalRevenue": "总收入",
+        "totalMembers": "总会员数",
+        "new": "新增",
+        "active": "活跃",
+        "dailyAttendance": "日均签到",
+        "peak": "峰值人数",
+        "revenueTrend": "收入趋势 (近6个月)",
+        "revenueSources": "收入来源",
+        "popularCourses": "热门课程 (Top 5)",
+        "ageDistribution": "会员年龄分布",
+        "genderDistribution": "性别分布",
+        "memberStatus": "会员状态分布",
+        "chart": {
+            "active": "有效",
+            "inactive": "无效/过期",
+            "revenueSource": "收入来源",
+            "bookings": "预约数",
+            "gender": "性别",
+            "status": "状态"
+        }
+    },
+    "memberManagement": {
+        "title": "会员管理",
+        "addMember": "+ 添加会员",
+        "loading": "加载会员中...",
+        "empty": "暂无会员。",
+        "columns": {
+            "id": "ID",
+            "username": "用户名",
+            "fullName": "姓名",
+            "phone": "电话",
+            "status": "状态",
+            "actions": "操作"
+        },
+        "status": {
+            "active": "活跃",
+            "inactive": "停用"
+        },
+        "actions": {
+            "details": "详情",
+            "edit": "编辑",
+            "delete": "删除"
+        },
+        "modal": {
+            "detailsTitle": "会员详情",
+            "editTitle": "编辑会员",
+            "addTitle": "添加新会员",
+            "basicInfo": "基本信息",
+            "membershipCards": "会员卡",
+            "issueCard": "发卡",
+            "close": "关闭",
+            "save": "保存更改",
+            "create": "创建会员"
+        },
+        "cards": {
+            "loading": "加载会员卡...",
+            "empty": "暂无会员卡。",
+            "cardNo": "卡号",
+            "type": "类型",
+            "balance": "余额/天数",
+            "payment": "支付 (已付/总额)",
+            "validity": "有效期",
+            "status": "状态",
+            "actions": "操作",
+            "pay": "支付",
+            "delete": "删除",
+            "days": "天",
+            "bal": "余额",
+            "paid": "已付",
+            "unpaid": "未付",
+            "valid": "有效",
+            "invalid": "无效"
+        },
+        "issueModal": {
+            "title": "办理新卡",
+            "cardType": "卡种",
+            "paidAmount": "实付金额",
+            "submit": "确认发卡",
+            "priceHint": "0 表示未付/稍后支付。",
+            "selectType": "请选择卡种"
+        },
+        "alerts": {
+            "paymentSuccess": "支付成功！",
+            "paymentFail": "支付失败，请重试。",
+            "deleteCardConfirm": "确定要删除这张会员卡吗？此操作无法撤销。",
+            "deleteCardSuccess": "会员卡已删除！",
+            "deleteMemberConfirm": "确定要删除该会员吗？此操作无法撤销，所有关联数据（卡、预约）可能会受影响。",
+            "deleteMemberSuccess": "会员已删除。",
+            "updateSuccess": "会员更新成功！",
+            "createSuccess": "会员创建成功！",
+            "createFail": "创建失败，用户名可能已存在。"
+        }
+    },
+    "coachManagement": {
+        "title": "教练管理",
+        "add": "+ 添加教练",
+        "loading": "加载教练中...",
+        "empty": "暂无教练。",
+        "columns": {
+            "id": "ID",
+            "name": "姓名",
+            "username": "用户名",
+            "phone": "电话",
+            "specialty": "专长",
+            "experience": "从业年限",
+            "rate": "时薪",
+            "status": "状态",
+            "actions": "操作"
+        },
+        "modal": {
+            "editTitle": "编辑教练",
+            "addTitle": "添加新教练",
+            "save": "保存更改",
+            "create": "创建教练"
+        },
+        "fields": {
+            "username": "用户名",
+            "password": "密码",
+            "realName": "真实姓名",
+            "phone": "电话",
+            "specialty": "专长 (例如：瑜伽、普拉提)",
+            "experience": "从业年限 (年)",
+            "rate": "时薪 (¥)",
+            "gender": "性别",
+            "status": "状态"
+        },
+        "alerts": {
+            "updateSuccess": "教练信息更新成功！",
+            "createSuccess": "教练创建成功！",
+            "deleteConfirm": "确定要删除该教练吗？此操作无法撤销。",
+            "deleteSuccess": "教练已删除！"
+        }
+    },
+    "programManagement": {
+        "title": "课程管理",
+        "add": "+ 添加课程",
+        "loading": "加载课程中...",
+        "empty": "暂无课程。",
+        "columns": {
+            "id": "ID",
+            "name": "课程名称",
+            "coach": "教练",
+            "type": "类型",
+            "duration": "时长 (分钟)",
+            "maxSize": "最大人数",
+            "price": "价格",
+            "difficulty": "难度",
+            "status": "状态",
+            "actions": "操作"
+        },
+        "type": {
+            "group": "团课",
+            "private": "私教",
+            "free": "自主训练",
+            "unknown": "未知"
+        },
+        "difficulty": {
+            "beginner": "初级",
+            "intermediate": "中级",
+            "advanced": "高级"
+        },
+        "status": {
+            "active": "上架",
+            "offline": "下架",
+            "unknown": "未知"
+        },
+        "modal": {
+            "editTitle": "编辑课程",
+            "addTitle": "添加新课程",
+            "selectCoach": "请选择教练",
+            "save": "保存更改",
+            "create": "创建课程"
+        },
+        "fields": {
+            "name": "课程名称",
+            "coach": "教练",
+            "type": "类型",
+            "duration": "时长 (分钟)",
+            "maxSize": "最大人数",
+            "price": "价格 (¥)",
+            "difficulty": "难度",
+            "description": "描述",
+            "status": "状态"
+        },
+        "alerts": {
+            "updateSuccess": "课程更新成功！",
+            "updateFail": "更新课程失败。",
+            "createSuccess": "课程创建成功！",
+            "createFail": "创建课程失败。",
+            "deleteConfirm": "确定要删除该课程吗？",
+            "deleteSuccess": "课程已删除！",
+            "deleteFail": "删除课程失败。"
+        }
+    },
+    "cardTypeManagement": {
+        "title": "卡种管理 (定价与促销)",
+        "add": "+ 添加卡种",
+        "loading": "加载卡种中...",
+        "empty": "暂无卡种。",
+        "columns": {
+            "id": "ID",
+            "name": "卡种名称",
+            "duration": "时长 (天)",
+            "price": "价格 (¥)",
+            "status": "状态",
+            "description": "描述",
+            "actions": "操作"
+        },
+        "status": {
+            "active": "在售",
+            "discontinued": "停售"
+        },
+        "modal": {
+            "editTitle": "编辑卡种",
+            "addTitle": "添加新卡种",
+            "priceHint": "可在此调整价格以进行促销。",
+            "save": "保存更改",
+            "create": "创建卡种"
+        },
+        "fields": {
+            "name": "卡种名称",
+            "duration": "时长 (天)",
+            "price": "价格 (¥)",
+            "status": "状态",
+            "description": "描述"
+        },
+        "alerts": {
+            "updateSuccess": "卡种更新成功！",
+            "updateFail": "更新卡种失败。",
+            "createSuccess": "卡种创建成功！",
+            "createFail": "创建卡种失败。",
+            "deleteConfirm": "确定要删除该卡种吗？",
+            "deleteSuccess": "卡种已删除！",
+            "deleteFail": "删除卡种失败。"
+        }
+    },
+    "facilityManagement": {
+        "title": "设施与设备管理",
+        "tabs": {
+            "venue": "场馆",
+            "equipment": "设备"
+        },
+        "add": {
+            "venue": "+ 添加场馆",
+            "equipment": "+ 添加设备"
+        },
+        "loading": {
+            "venue": "加载场馆中...",
+            "equipment": "加载设备中..."
+        },
+        "empty": {
+            "venue": "暂无场馆。",
+            "equipment": "暂无设备。"
+        },
+        "columns": {
+            "id": "ID",
+            "name": "名称",
+            "type": "类型",
+            "capacity": "容量",
+            "area": "面积 (m²)",
+            "status": "状态",
+            "brandModel": "品牌/型号",
+            "location": "位置",
+            "actions": "操作"
+        },
+        "venueType": {
+            "group": "团课教室",
+            "private": "私教区",
+            "freeWeight": "自由力量区",
+            "pool": "游泳池",
+            "yoga": "瑜伽室",
+            "unknown": "未知"
+        },
+        "venueStatus": {
+            "open": "开放",
+            "closed": "关闭",
+            "maintenance": "维护中"
+        },
+        "equipmentStatus": {
+            "normal": "正常",
+            "repair": "报修",
+            "maintenance": "保养中",
+            "scrapped": "已报废",
+            "unknown": "未知"
+        },
+        "modal": {
+            "editVenue": "编辑场馆",
+            "addVenue": "添加场馆",
+            "editEquipment": "编辑设备",
+            "addEquipment": "添加设备",
+            "save": "保存"
+        },
+        "fields": {
+            "name": "名称",
+            "type": "类型",
+            "capacity": "容量",
+            "area": "面积 (m²)",
+            "status": "状态",
+            "description": "描述",
+            "brand": "品牌",
+            "model": "型号",
+            "location": "位置",
+            "purchasePrice": "购买价格",
+            "purchaseDate": "购买日期",
+            "typePlaceholder": "例如：有氧、力量"
+        },
+        "alerts": {
+            "operationFail": "操作失败",
+            "deleteConfirm": "确认删除？",
+            "deleteFail": "删除失败"
+        }
+    },
+    "attendanceManagementAdmin": {
+        "title": "考勤管理",
+        "refresh": "刷新",
+        "loading": "加载记录中...",
+        "empty": "暂无记录。",
+        "columns": {
+            "id": "ID",
+            "memberId": "会员ID",
+            "memberName": "会员姓名",
+            "checkIn": "签到时间",
+            "checkOut": "签退时间",
+            "duration": "时长 (分钟)"
+        },
+        "status": {
+            "inGym": "在馆",
+            "loading": "加载中..."
+        }
+    },
+    "paymentManagementAdmin": {
+        "title": "支付管理",
+        "placeholder": "支付记录占位符。"
+    },
+    "coachCourseManagement": {
+        "title": "我的课程管理",
+        "add": "+ 发布新课程",
+        "loading": "加载课程中...",
+        "empty": "您尚未发布任何课程。",
+        "courseName": "课程名称",
+        "type": "类型",
+        "duration": "时长 (分钟)",
+        "price": "价格",
+        "status": "状态",
+        "difficulty": "难度",
+        "maxParticipants": "最大人数",
+        "actions": "操作",
+        "edit": "编辑",
+        "delete": "删除",
+        "modal": {
+            "addTitle": "发布新课程",
+            "editTitle": "编辑课程",
+            "save": "保存课程",
+            "create": "发布",
+            "cancel": "取消"
+        },
+        "fields": {
+            "name": "课程名称",
+            "description": "课程描述",
+            "type": "类型 (1:团课, 2:私教)",
+            "difficulty": "难度 (1:初级, 2:中级, 3:高级)",
+            "duration": "时长 (分钟)",
+            "price": "价格 (¥)",
+            "max": "最大参与人数",
+            "status": "状态 (0:下架, 1:上架)"
+        },
+        "alerts": {
+            "createSuccess": "课程发布成功！",
+            "updateSuccess": "课程更新成功！",
+            "deleteConfirm": "确定要删除该课程吗？",
+            "deleteSuccess": "课程已删除。"
+        }
+    }
+}
