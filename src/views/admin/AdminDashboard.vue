@@ -1,19 +1,22 @@
 <template>
   <div class="admin-dashboard">
-    <h1>{{ $t('adminDashboard.title') }}</h1>
-
-    <!-- Key Metrics Row -->
+    <!-- Metrics Row -->
     <div class="metrics-row">
-        <div class="metric-card glass-panel">
-            <h3>{{ $t('adminDashboard.totalRevenue') }}</h3>
-            <div class="value">¥{{ revenueTrend.totalRevenue || 0 }}</div>
-        </div>
-         <div class="metric-card glass-panel">
+        <div class="metric-card shadow-sm">
             <h3>{{ $t('adminDashboard.totalMembers') }}</h3>
             <div class="value">{{ memberStats.totalMembers || 0 }}</div>
-            <div class="sub">{{ $t('adminDashboard.new') }}: {{ memberStats.newMembersThisMonth || 0 }} | {{ $t('adminDashboard.active') }}: {{ memberStats.activeMembers || 0 }}</div>
+            <div class="sub">
+               <span :class="{'text-success': (memberStats.newMembersThisMonth || 0) > 0}">
+                 +{{ memberStats.newMembersThisMonth || 0 }}
+               </span> {{ $t('adminDashboard.newThisMonth') }}
+            </div>
         </div>
-         <div class="metric-card glass-panel">
+        <div class="metric-card shadow-sm">
+            <h3>{{ $t('adminDashboard.totalRevenue') }}</h3>
+            <div class="value">¥{{ revenueTrend.totalRevenue || 0 }}</div>
+            <div class="sub">{{ $t('adminDashboard.monthlyRevenue') }}</div>
+        </div>
+        <div class="metric-card shadow-sm">
             <h3>{{ $t('adminDashboard.dailyAttendance') }}</h3>
             <div class="value">{{ attendanceStats.avgDailyCheckins || 0 }}</div>
             <div class="sub">{{ $t('adminDashboard.peak') }}: {{ attendanceStats.peakHours || '-' }}</div>
@@ -51,8 +54,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import request from '@/api/request'; // Changed from raw axios to request
 import type { RevenueTrend, MemberStats, AttendanceStats, PopularCourse } from '@/types';
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -69,6 +72,7 @@ const revenueTrend = ref<RevenueTrend>({});
 const memberStats = ref<MemberStats>({});
 const attendanceStats = ref<AttendanceStats>({});
 const popularCourses = ref<PopularCourse[]>([]);
+let timer: ReturnType<typeof setInterval> | null = null;
 
 // Options for charts
 const revenueChartOption = computed(() => {
@@ -178,17 +182,19 @@ const statusChartOption = computed(() => {
 });
 
 const fetchData = async () => {
+    const t = Date.now();
     try {
         const [resRev, resMem, resAtt, resPop] = await Promise.all([
-            axios.get('/api/report/revenue-trend'),
-            axios.get('/api/report/member-statistics'),
-            axios.get('/api/report/attendance-analysis'),
-            axios.get('/api/report/popular-courses')
+            request.get<any, RevenueTrend>(`/report/revenue-trend?t=${t}`),
+            request.get<any, MemberStats>(`/report/member-statistics?t=${t}`),
+            request.get<any, AttendanceStats>(`/report/attendance-analysis?t=${t}`),
+            request.get<any, PopularCourse[]>(`/report/popular-courses?t=${t}`)
         ]);
-        revenueTrend.value = resRev.data;
-        memberStats.value = resMem.data;
-        attendanceStats.value = resAtt.data;
-        popularCourses.value = resPop.data;
+        // request.get returns the data directly
+        revenueTrend.value = resRev;
+        memberStats.value = resMem;
+        attendanceStats.value = resAtt;
+        popularCourses.value = resPop;
     } catch(err) {
         console.error("Failed to load report data", err);
     }
@@ -196,6 +202,11 @@ const fetchData = async () => {
 
 onMounted(() => {
     fetchData();
+    timer = setInterval(fetchData, 5000);
+});
+
+onUnmounted(() => {
+    if (timer) clearInterval(timer);
 });
 </script>
 

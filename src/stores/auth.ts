@@ -19,9 +19,14 @@ export const useAuthStore = defineStore('auth', () => {
 
     localStorage.setItem('user', JSON.stringify(adaptedUser))
     localStorage.setItem('role', data.role)
-    localStorage.setItem('token', 'mock-token') // Persist a mock token if needed
+    if (data.token) {
+        localStorage.setItem('token', data.token)
+        token.value = data.token
+    } else {
+        // Fallback or error handling if token is missing (should verify with backend)
+        console.warn('Login successful but no token received.')
+    }
 
-    token.value = 'mock-token'
     role.value = data.role
   }
 

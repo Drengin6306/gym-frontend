@@ -9,6 +9,7 @@ export interface LoginResponse {
     username: string;
     role: string;
     realName: string;
+    token: string;
 }
 
 export interface User {
@@ -29,6 +30,7 @@ export interface Member {
     birthday?: string;
     avatarUrl?: string;
     status: number;
+    activeCardCount?: number;
     createTime?: string;
 }
 

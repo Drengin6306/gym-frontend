@@ -202,7 +202,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
-import axios from 'axios';
+import request from '@/api/request'; // Changed from raw axios
 import type { Venue, Equipment } from '@/types';
 import { useI18n } from 'vue-i18n';
 
@@ -261,11 +261,11 @@ const fetchData = async () => {
     loading.value = true;
     try {
         if (activeTab.value === 'venue') {
-            const res = await axios.get('/api/venue/all');
-            venues.value = res.data;
+            const res = await request.get<any, Venue[]>('/venue/all'); // Removed /api prefix
+            venues.value = res; // Removed .data
         } else {
-            const res = await axios.get('/api/equipment/all');
-            equipmentList.value = res.data;
+            const res = await request.get<any, Equipment[]>('/equipment/all'); // Removed /api prefix
+            equipmentList.value = res; // Removed .data
         }
     } catch (err) {
         console.error("Fetch failed", err);
@@ -299,9 +299,9 @@ const handleEditVenue = (venue: Venue) => openVenueModal(true, venue);
 const submitVenue = async () => {
     try {
         if (isEditing.value) {
-            await axios.put('/api/venue/update', venueForm.value);
+            await request.put('/venue/update', venueForm.value); // Removed /api prefix
         } else {
-            await axios.post('/api/venue/add', venueForm.value);
+            await request.post('/venue/add', venueForm.value); // Removed /api prefix
         }
         closeVenueModal();
         fetchData();
@@ -313,7 +313,7 @@ const submitVenue = async () => {
 const handleDeleteVenue = async (id: number) => {
     if (!confirm(t('facilityManagement.alerts.deleteConfirm'))) return;
     try {
-        await axios.delete(`/api/venue/delete/${id}`);
+        await request.delete(`/venue/delete/${id}`); // Removed /api prefix
         fetchData();
     } catch { alert(t('facilityManagement.alerts.deleteFail')); }
 }
@@ -330,7 +330,7 @@ const openEquipmentModal = (editMode: boolean, item?: Equipment) => {
         equipmentForm.value = { name: '', type: '', brand: '', status: 1, location: '' } as Equipment;
     }
     showEquipmentModal.value = true;
-}
+};
 const closeEquipmentModal = () => showEquipmentModal.value = false;
 
 const handleEditEquipment = (item: Equipment) => openEquipmentModal(true, item);
@@ -338,9 +338,9 @@ const handleEditEquipment = (item: Equipment) => openEquipmentModal(true, item);
 const submitEquipment = async () => {
     try {
         if (isEditing.value) {
-            await axios.put('/api/equipment/update', equipmentForm.value);
+            await request.put('/equipment/update', equipmentForm.value); // Removed /api prefix
         } else {
-            await axios.post('/api/equipment/add', equipmentForm.value);
+            await request.post('/equipment/add', equipmentForm.value); // Removed /api prefix
         }
         closeEquipmentModal();
         fetchData();
@@ -352,7 +352,7 @@ const submitEquipment = async () => {
 const handleDeleteEquipment = async (id: number) => {
     if (!confirm(t('facilityManagement.alerts.deleteConfirm'))) return;
     try {
-        await axios.delete(`/api/equipment/delete/${id}`);
+        await request.delete(`/equipment/delete/${id}`); // Removed /api prefix
         fetchData();
     } catch { alert(t('facilityManagement.alerts.deleteFail')); }
 }

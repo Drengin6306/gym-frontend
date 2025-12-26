@@ -44,7 +44,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import type { Booking } from '@/types';
-import axios from 'axios';
+import request from '@/api/request';
 import { updateBookingStatus } from '@/api/course';
 import { useI18n } from 'vue-i18n';
 
@@ -58,10 +58,10 @@ const fetchData = async () => {
     if(!authStore.user) return;
     loading.value = true;
     try {
-        const res = await axios.get(`/api/booking/coach/${authStore.user.id}`);
+        const res = await request.get<any, Booking[]>(`/booking/coach/${authStore.user.id}`);
         // We might need to fetch member details if not included.
         // For now, let's just show Member ID or try to map if we have students list cached.
-        bookings.value = res.data;
+        bookings.value = res;
     } catch(err) {
         console.error(err);
     } finally {

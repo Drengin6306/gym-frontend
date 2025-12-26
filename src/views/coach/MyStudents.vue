@@ -36,7 +36,7 @@
 import { ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import type { Member, Booking } from '@/types';
-import axios from 'axios';
+import request from '@/api/request';
 
 import { useI18n } from 'vue-i18n';
 
@@ -54,11 +54,11 @@ const fetchData = async () => {
     loading.value = true;
     try {
         const [resStudents, resBookings] = await Promise.all([
-             axios.get(`/api/coach/${authStore.user.id}/students`),
-             axios.get(`/api/booking/coach/${authStore.user.id}`)
+             request.get<any, Member[]>(`/coach/${authStore.user.id}/students`),
+             request.get<any, Booking[]>(`/booking/coach/${authStore.user.id}`)
         ]);
-        students.value = resStudents.data;
-        allCoachBookings.value = resBookings.data;
+        students.value = resStudents;
+        allCoachBookings.value = resBookings;
     } catch(err) {
         console.error(err);
     } finally {

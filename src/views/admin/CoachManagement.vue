@@ -155,7 +155,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import request from '@/api/request'; // Changed from raw axios
 import type { Coach } from '@/types';
 import { useI18n } from 'vue-i18n';
 
@@ -169,8 +169,8 @@ const fetchCoaches = async () => {
     loading.value = true;
     errorMsg.value = '';
     try {
-        const res = await axios.get('/api/coach/all');
-        coaches.value = res.data;
+        const res = await request.get<any, Coach[]>('/coach/all'); // Removed /api prefix
+        coaches.value = res; // Removed .data
     } catch (err) {
         console.error("Failed to fetch coaches", err);
         errorMsg.value = 'Failed to load coach data. Please try again.';
@@ -195,7 +195,7 @@ const closeEditModal = () => {
 
 const submitEdit = async () => {
     try {
-        await axios.put('/api/coach/update', editForm.value);
+        await request.put('/coach/update', editForm.value); // Removed /api prefix
         alert(t('coachManagement.alerts.updateSuccess'));
         closeEditModal();
         fetchCoaches();
@@ -240,7 +240,7 @@ const closeAddModal = () => {
 
 const submitAdd = async () => {
     try {
-        await axios.post('/api/coach/add', addForm.value);
+        await request.post('/coach/add', addForm.value); // Removed /api prefix
         alert(t('coachManagement.alerts.createSuccess'));
         closeAddModal();
         fetchCoaches();
@@ -256,7 +256,7 @@ const handleDelete = async (id: number) => {
     }
 
     try {
-        await axios.delete(`/api/coach/delete/${id}`); // Check backend mapping, usually /delete/{id}
+        await request.delete(`/coach/delete/${id}`); // Removed /api prefix
         alert(t('coachManagement.alerts.deleteSuccess'));
         fetchCoaches();
     } catch (err) {
@@ -313,6 +313,8 @@ onMounted(() => {
     width: 500px;
     background: #fff; padding: 0;
     border-radius: 12px;
+    max-height: 90vh; /* Prevent modal from exceeding viewport height */
+    overflow-y: auto; /* Scrollable content */
 }
 .modal-header {
     display: flex; justify-content: space-between; align-items: center;

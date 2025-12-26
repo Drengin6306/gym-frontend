@@ -130,7 +130,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import request from '@/api/request'; // Changed from raw axios
 import type { CardType } from '@/types';
 import { useI18n } from 'vue-i18n';
 
@@ -144,8 +144,8 @@ const fetchCardTypes = async () => {
     loading.value = true;
     errorMsg.value = '';
     try {
-        const res = await axios.get('/api/card-type/all');
-        cardTypes.value = res.data;
+        const res = await request.get<any, CardType[]>('/card-type/all'); // Removed /api prefix
+        cardTypes.value = res; // Removed .data
     } catch (err) {
         console.error("Failed to fetch card types", err);
         errorMsg.value = 'Failed to load card types.';
@@ -170,7 +170,7 @@ const closeEditModal = () => {
 
 const submitEdit = async () => {
     try {
-        await axios.put('/api/card-type/update', editForm.value);
+        await request.put('/card-type/update', editForm.value); // Removed /api prefix
         alert(t('cardTypeManagement.alerts.updateSuccess'));
         closeEditModal();
         fetchCardTypes();
@@ -207,7 +207,7 @@ const closeAddModal = () => {
 
 const submitAdd = async () => {
     try {
-        await axios.post('/api/card-type/add', addForm.value);
+        await request.post('/card-type/add', addForm.value); // Removed /api prefix
         alert(t('cardTypeManagement.alerts.createSuccess'));
         closeAddModal();
         fetchCardTypes();
@@ -222,7 +222,7 @@ const handleDelete = async (id: number) => {
         return;
     }
     try {
-        await axios.delete(`/api/card-type/delete/${id}`);
+        await request.delete(`/card-type/delete/${id}`); // Removed /api prefix
         alert(t('cardTypeManagement.alerts.deleteSuccess'));
         fetchCardTypes();
     } catch (err) {

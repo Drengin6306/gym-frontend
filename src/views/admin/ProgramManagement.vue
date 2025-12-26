@@ -205,7 +205,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import request from '@/api/request'; // Changed from raw axios
 import type { FitnessProgram, Coach } from '@/types';
 import { useI18n } from 'vue-i18n';
 
@@ -220,8 +220,8 @@ const fetchPrograms = async () => {
     loading.value = true;
     errorMsg.value = '';
     try {
-        const res = await axios.get('/api/fitness-program/all');
-        programs.value = res.data;
+        const res = await request.get<any, FitnessProgram[]>('/fitness-program/all'); // Removed /api prefix
+        programs.value = res; // Removed .data
     } catch (err) {
         console.error("Failed to fetch programs", err);
         errorMsg.value = 'Failed to load courses.';
@@ -232,8 +232,8 @@ const fetchPrograms = async () => {
 
 const fetchCoaches = async () => {
     try {
-        const res = await axios.get('/api/coach/all');
-        coaches.value = res.data;
+        const res = await request.get<any, Coach[]>('/coach/all'); // Removed /api prefix
+        coaches.value = res; // Removed .data
     } catch(err) {
         console.error("Failed to fetch coaches", err);
     }
@@ -274,7 +274,7 @@ const closeEditModal = () => {
 
 const submitEdit = async () => {
     try {
-        await axios.put('/api/fitness-program/update', editForm.value);
+        await request.put('/fitness-program/update', editForm.value); // Removed /api prefix
         alert(t('programManagement.alerts.updateSuccess'));
         closeEditModal();
         fetchPrograms();
@@ -319,7 +319,7 @@ const closeAddModal = () => {
 
 const submitAdd = async () => {
     try {
-        await axios.post('/api/fitness-program/add', addForm.value);
+        await request.post('/fitness-program/add', addForm.value); // Removed /api prefix
         alert(t('programManagement.alerts.createSuccess'));
         closeAddModal();
         fetchPrograms();
@@ -334,7 +334,7 @@ const handleDelete = async (id: number) => {
         return;
     }
     try {
-        await axios.delete(`/api/fitness-program/delete/${id}`);
+        await request.delete(`/fitness-program/delete/${id}`); // Removed /api prefix
          alert(t('programManagement.alerts.deleteSuccess'));
          fetchPrograms();
     } catch (err) {
