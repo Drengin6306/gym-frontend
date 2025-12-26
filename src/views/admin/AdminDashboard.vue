@@ -38,19 +38,11 @@
             <h3>{{ $t('adminDashboard.popularCourses') }}</h3>
             <v-chart class="chart" :option="courseChartOption" autoresize />
         </div>
-         <div class="chart-card glass-panel small">
-            <h3>{{ $t('adminDashboard.ageDistribution') }}</h3>
-            <v-chart class="chart" :option="ageChartOption" autoresize />
-        </div>
-    </div>
-
-    <!-- Charts Row 3 -->
-    <div class="charts-row">
-        <div class="chart-card glass-panel">
+        <div class="chart-card glass-panel small">
             <h3>{{ $t('adminDashboard.genderDistribution') }}</h3>
             <v-chart class="chart" :option="genderChartOption" autoresize />
         </div>
-         <div class="chart-card glass-panel">
+         <div class="chart-card glass-panel small">
             <h3>{{ $t('adminDashboard.memberStatus') }}</h3>
             <v-chart class="chart" :option="statusChartOption" autoresize />
         </div>
@@ -124,14 +116,7 @@ const courseChartOption = computed(() => {
     };
 });
 
-const ageChartOption = computed(() => {
-    const dist = memberStats.value.ageDistribution || {};
-    const data = Object.keys(dist).map(k => ({ name: k, value: dist[k] }));
-    return {
-        tooltip: { trigger: 'item' },
-        series: [{ type: 'pie', radius: '60%', data }]
-    };
-});
+
 
 const genderChartOption = computed(() => {
     const dist = memberStats.value.genderDistribution || {};
