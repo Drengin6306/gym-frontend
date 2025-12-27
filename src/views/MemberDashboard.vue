@@ -244,7 +244,7 @@ const loadingTypes = ref(false);
 // Carousel State
 const currentSlide = ref(0);
 const slides = ref([
-  { image: 'https://images.unsplash.com/photo-1540497077202-7c8a33801524?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80', title: 'Start Your Journey', desc: 'Join the best classes in town.' },
+  { image: 'https://img.zx123.cn/Resources/zx123cn/uploadfile/2021/0208/b0920f738180f6b23306cdc9c65c1132.jpg', title: 'Start Your Journey', desc: 'Join the best classes in town.' },
   { image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80', title: 'Professional Trainers', desc: 'Get expert guidance from top coaches.' },
   { image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80', title: 'Premium Equipment', desc: 'Train with the best gear.' }
 ]);
