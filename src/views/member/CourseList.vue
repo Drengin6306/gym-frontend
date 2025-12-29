@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import { getAllPrograms, createBooking } from '@/api/course';
+import { getAllPrograms, createBooking, checkAvailability } from '@/api/course';
 import { getAllCoaches } from '@/api/coach'; // Import this
 import type { FitnessProgram, Coach } from '@/types'; // Import Coach
 import { useAuthStore } from '@/stores/auth';
@@ -113,8 +113,21 @@ const confirmBooking = async () => {
         // Calculate end time
         const start = new Date(startDateTime);
         const end = new Date(start.getTime() + selectedCourse.value.durationMinutes * 60000);
-        // Format YYYY-MM-DDTHH:mm:ss
-        const endDateTime = end.toISOString().slice(0, 19).replace('T', 'T');
+        // Format YYYY-MM-DDTHH:mm:ss manually to avoid timezone shift from toISOString()
+        const year = end.getFullYear();
+        const month = String(end.getMonth() + 1).padStart(2, '0');
+        const day = String(end.getDate()).padStart(2, '0');
+        const hours = String(end.getHours()).padStart(2, '0');
+        const minutes = String(end.getMinutes()).padStart(2, '0');
+        const seconds = String(end.getSeconds()).padStart(2, '0');
+        const endDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+
+        // Check availability
+        const isAvailable = await checkAvailability(undefined, selectedCourse.value.coachId, startDateTime, endDateTime);
+        if (!isAvailable) {
+            alert(t('programs.modal.unavailable', 'The selected time slot is not available.'));
+            return;
+        }
 
         await createBooking({
             memberId: authStore.user.id,
@@ -122,7 +135,7 @@ const confirmBooking = async () => {
             relatedId: selectedCourse.value.id,
             coachId: selectedCourse.value.coachId,
             startTime: startDateTime,
-            endTime: endDateTime,
+            // endTime: endDateTime,
             bookingStatus: 0, // Pending
             durationMinutes: selectedCourse.value.durationMinutes,
             participantsCount: 1

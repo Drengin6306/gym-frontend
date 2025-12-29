@@ -50,3 +50,14 @@ export function deleteProgram(id: number) {
 export function getProgramsByCoach(coachId: number) {
     return request.get<any, FitnessProgram[]>(`/fitness-program/coach/${coachId}`);
 }
+
+export function checkAvailability(venueId: number | undefined, coachId: number | undefined, startTime: string, endTime: string) {
+    return request.get<any, boolean>('/booking/check-availability', {
+        params: {
+            venueId,
+            coachId,
+            startTime,
+            endTime
+        }
+    });
+}
