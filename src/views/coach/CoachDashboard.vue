@@ -130,20 +130,264 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.coach-dashboard { padding: 20px; }
-.welcome-section { padding: 30px; margin-bottom: 20px; border-radius: 12px; }
-.stats-row { display: flex; gap: 20px; margin-bottom: 20px; }
-.stat-card { flex: 1; padding: 20px; border-radius: 12px; text-align: center; cursor: pointer; transition: transform 0.2s; background: #fff; }
-.stat-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.stat-value { font-size: 2.5rem; font-weight: bold; color: #3498db; }
-.stat-label { color: #7f8c8d; }
+/* 🏋️ Coach Dashboard - Professional Cyan-Green Theme */
 
-.recent-section { background: #fff; padding: 20px; border-radius: 12px; }
-.class-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-.class-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f0f0f0; }
-.class-item .time { font-weight: bold; width: 80px; color: #2c3e50; }
-.class-item .info { flex: 1; display: flex; flex-direction: column; }
-.class-item .status { font-size: 0.8rem; padding: 4px 8px; background: #eaf6fd; color: #3498db; border-radius: 4px; }
+.coach-dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  animation: fadeInUp 0.5s ease-out;
+}
 
-.btn-link { background: none; border: none; color: #3498db; margin-top: 15px; cursor: pointer; text-decoration: underline; }
+/* Welcome Section with Gradient */
+.welcome-section {
+  padding: 32px;
+  margin-bottom: 32px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.08) 0%, rgba(146, 254, 157, 0.08) 100%);
+  border: 1px solid rgba(0, 201, 255, 0.15);
+}
+
+.welcome-section h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: var(--coach-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-section p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* Stats Row with Gradient Border Cards */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+/* Gradient Border Card Effect */
+.stat-card {
+  position: relative;
+  padding: 2px;
+  background: var(--coach-gradient);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: white;
+  border-radius: calc(var(--radius-lg) - 2px);
+  z-index: 1;
+}
+
+.stat-card > * {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 201, 255, 0.3);
+}
+
+.stat-card:hover::before {
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.05) 0%, rgba(146, 254, 157, 0.05) 100%);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--coach-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Recent Section */
+.recent-section {
+  background: white;
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.recent-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recent-section h3::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 28px;
+  background: var(--coach-gradient);
+  border-radius: 4px;
+}
+
+/* Course Timeline */
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.class-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.04) 0%, rgba(146, 254, 157, 0.04) 100%);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--coach-primary);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.class-item::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--coach-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(0, 201, 255, 0.2);
+}
+
+.class-item:hover {
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.08) 0%, rgba(146, 254, 157, 0.08) 100%);
+  transform: translateX(8px);
+  box-shadow: var(--shadow-sm);
+}
+
+.class-item .time {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--coach-primary);
+  min-width: 100px;
+  padding-left: 20px;
+}
+
+.class-item .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 20px;
+}
+
+.class-item .info strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.class-item .info span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.class-item .status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.1) 0%, rgba(146, 254, 157, 0.1) 100%);
+  color: var(--coach-primary);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 201, 255, 0.2);
+}
+
+/* Actions */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-link {
+  background: rgba(0, 201, 255, 0.05);
+  border: 2px solid rgba(0, 201, 255, 0.1);
+  color: var(--coach-primary);
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  background: rgba(0, 201, 255, 0.1);
+  border-color: var(--coach-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 201, 255, 0.2);
+}
+
+/* Loading & Empty States */
+.loading,
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .coach-dashboard {
+    padding: 16px;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .class-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .class-item .time {
+    min-width: auto;
+    padding-left: 20px;
+  }
+}
 </style>

@@ -211,17 +211,190 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.admin-dashboard { padding: 20px; }
-.metrics-row { display: flex; gap: 20px; margin-bottom: 20px; }
-.metric-card { flex: 1; padding: 25px; background: #fff; border-radius: 12px; text-align: center; }
-.metric-card h3 { margin: 0 0 10px 0; color: #7f8c8d; font-size: 1rem; }
-.metric-card .value { font-size: 2rem; font-weight: bold; color: #2c3e50; }
-.metric-card .sub { color: #95a5a6; font-size: 0.9rem; margin-top: 5px; }
+/* 🏋️ Admin Dashboard - Authority Purple Theme */
 
-.charts-row { display: flex; gap: 20px; margin-bottom: 20px; height: 350px; }
-.chart-card { background: #fff; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
-.chart-card.large { flex: 2; }
-.chart-card.small { flex: 1; }
-.chart-card h3 { margin: 0 0 15px 0; font-size: 1.1rem; color: #34495e; }
-.chart { flex: 1; width: 100%; height: 100%; }
+.admin-dashboard {
+  padding: 32px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* ===== Metrics Cards with Gradient Border ===== */
+.metrics-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  flex: 1;
+  position: relative;
+  padding: 3px;
+  background: var(--admin-gradient);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  animation: cardPulse 3s ease-in-out infinite;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: white;
+  border-radius: calc(var(--radius-lg) - 3px);
+  z-index: 1;
+}
+
+.metric-card > * {
+  position: relative;
+  z-index: 2;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--admin-shadow);
+}
+
+.metric-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--admin-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.metric-card .sub {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
+.text-success {
+  color: var(--success-color);
+  font-weight: 700;
+}
+
+/* ===== Chart Cards Enhanced ===== */
+.charts-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  min-height: 380px;
+}
+
+.chart-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--admin-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--admin-shadow);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.chart-card:hover::before {
+  opacity: 1;
+}
+
+.chart-card.large {
+  flex: 2;
+}
+
+.chart-card.small {
+  flex: 1;
+}
+
+.chart-card h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: var(--admin-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.chart {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+  .metrics-row {
+    flex-wrap: wrap;
+  }
+
+  .metric-card {
+    flex: 1 1 calc(50% - 12px);
+    min-width: 200px;
+  }
+
+  .charts-row {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .chart-card.large,
+  .chart-card.small {
+    flex: 1 1 auto;
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 20px 16px;
+  }
+
+  .metrics-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .metric-card {
+    flex: 1 1 auto;
+  }
+
+  .charts-row {
+    gap: 16px;
+  }
+}
 </style>
