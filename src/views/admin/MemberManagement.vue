@@ -239,7 +239,7 @@
         <div class="modal-body">
           <form @submit.prevent="submitIssueCard">
             <div class="form-group">
-              <label>{{ $t("memberManagement.columns.fullName") }}</label>
+              <label>{{ $t("memberManagement.fields.realName") }}</label>
               <input
                 type="text"
                 :value="selectedMember?.realName"
@@ -265,7 +265,7 @@
               <input
                 type="number"
                 v-model="issueCardForm.paidAmount"
-                placeholder="Enter amount paid"
+                :placeholder="$t('memberManagement.issueModal.paidAmount')"
               />
               <small style="color: #777">{{
                 $t("memberManagement.issueModal.priceHint")
@@ -355,38 +355,38 @@
         <div class="modal-body">
           <form @submit.prevent="submitAddMember">
             <div class="form-group">
-              <label>{{ $t("memberManagement.columns.username") }}</label>
+              <label>{{ $t("memberManagement.fields.username") }}</label>
               <input
                 type="text"
                 v-model="addForm.username"
                 required
-                placeholder="Enter login username"
+                :placeholder="$t('memberManagement.placeholders.username')"
               />
             </div>
             <div class="form-group">
-              <label>Password</label>
+              <label>{{ $t("memberManagement.fields.password") }}</label>
               <input
                 type="password"
                 v-model="addForm.password"
                 required
-                placeholder="Enter login password"
+                :placeholder="$t('memberManagement.placeholders.password')"
               />
             </div>
             <div class="form-group">
-              <label>{{ $t("memberManagement.columns.fullName") }}</label>
+              <label>{{ $t("memberManagement.fields.realName") }}</label>
               <input
                 type="text"
                 v-model="addForm.realName"
                 required
-                placeholder="Enter full name"
+                :placeholder="$t('memberManagement.placeholders.realName')"
               />
             </div>
             <div class="form-group">
-              <label>{{ $t("memberManagement.columns.phone") }}</label>
+              <label>{{ $t("memberManagement.fields.phone") }}</label>
               <input
                 type="text"
                 v-model="addForm.phone"
-                placeholder="Enter phone number"
+                :placeholder="$t('memberManagement.placeholders.phone')"
               />
             </div>
             <div class="form-group">

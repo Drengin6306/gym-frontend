@@ -316,6 +316,20 @@
       "save": "保存更改",
       "create": "创建会员"
     },
+    "fields": {
+      "username": "用户名",
+      "password": "密码",
+      "realName": "姓名",
+      "phone": "电话",
+      "gender": "性别",
+      "email": "邮箱"
+    },
+    "placeholders": {
+      "username": "请输入登录用户名",
+      "password": "请输入登录密码",
+      "realName": "请输入真实姓名",
+      "phone": "请输入电话号码"
+    },
     "cards": {
       "loading": "加载会员卡...",
       "empty": "暂无会员卡。",
@@ -387,6 +401,13 @@
       "rate": "课时费 (¥)",
       "gender": "性别",
       "status": "状态"
+    },
+    "placeholders": {
+      "username": "请输入登录用户名",
+      "password": "请输入登录密码",
+      "realName": "请输入真实姓名",
+      "phone": "请输入电话号码",
+      "specialty": "例如：瑜伽、普拉提"
     },
     "alerts": {
       "updateSuccess": "教练更新成功！",

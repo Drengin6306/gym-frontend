@@ -340,6 +340,20 @@
             "save": "Save Changes",
             "create": "Create Member"
         },
+        "fields": {
+            "username": "Username",
+            "password": "Password",
+            "realName": "Full Name",
+            "phone": "Phone",
+            "gender": "Gender",
+            "email": "Email"
+        },
+        "placeholders": {
+            "username": "Enter login username",
+            "password": "Enter login password",
+            "realName": "Enter full name",
+            "phone": "Enter phone number"
+        },
         "cards": {
             "loading": "Loading cards...",
             "empty": "No membership cards found.",
@@ -411,6 +425,13 @@
             "rate": "Hourly Rate (¥)",
             "gender": "Gender",
             "status": "Status"
+        },
+        "placeholders": {
+            "username": "Login username",
+            "password": "Login password",
+            "realName": "Full Name",
+            "phone": "Phone Number",
+            "specialty": "e.g. Yoga, Pilates"
         },
         "alerts": {
             "updateSuccess": "Coach updated successfully!",

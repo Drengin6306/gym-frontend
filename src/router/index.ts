@@ -17,7 +17,7 @@ const router = createRouter({
         {
           path: 'dashboard',
           name: 'dashboard',
-          // Temporary placeholder
+          // Member Dashboard
           component: () => import('@/views/MemberDashboard.vue'),
         },
         {

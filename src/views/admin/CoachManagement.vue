@@ -109,23 +109,23 @@
                 <form @submit.prevent="submitAdd">
                     <div class="form-group">
                         <label>{{ $t('coachManagement.fields.username') }}</label>
-                        <input type="text" v-model="addForm.username" required placeholder="Login username" />
+                        <input type="text" v-model="addForm.username" required :placeholder="$t('coachManagement.placeholders.username')" />
                     </div>
                     <div class="form-group">
                         <label>{{ $t('coachManagement.fields.password') }}</label>
-                        <input type="password" v-model="addForm.password" required placeholder="Login password" />
+                        <input type="password" v-model="addForm.password" required :placeholder="$t('coachManagement.placeholders.password')" />
                     </div>
                     <div class="form-group">
                         <label>{{ $t('coachManagement.fields.realName') }}</label>
-                        <input type="text" v-model="addForm.realName" required placeholder="Full Name" />
+                        <input type="text" v-model="addForm.realName" required :placeholder="$t('coachManagement.placeholders.realName')" />
                     </div>
                     <div class="form-group">
                         <label>{{ $t('coachManagement.fields.phone') }}</label>
-                        <input type="text" v-model="addForm.phone" placeholder="Phone Number" />
+                        <input type="text" v-model="addForm.phone" :placeholder="$t('coachManagement.placeholders.phone')" />
                     </div>
                     <div class="form-group">
                         <label>{{ $t('coachManagement.fields.specialty') }}</label>
-                        <input type="text" v-model="addForm.specialty" placeholder="e.g. Yoga, Pilates" />
+                        <input type="text" v-model="addForm.specialty" :placeholder="$t('coachManagement.placeholders.specialty')" />
                     </div>
                     <div class="form-group">
                         <label>{{ $t('coachManagement.fields.experience') }}</label>
