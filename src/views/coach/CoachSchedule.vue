@@ -131,27 +131,247 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.coach-schedule-page { padding: 20px; }
-.tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-.tab { background: none; border: none; padding: 10px 20px; font-weight: bold; color: #888; cursor: pointer; }
-.tab.active { color: #3498db; border-bottom: 2px solid #3498db; margin-bottom: -12px; }
+/* 🏋️ Coach Schedule - Coach Cyan-Green Theme */
 
-.date-group { margin-bottom: 30px; }
-.date-header { font-size: 1.1rem; color: #555; margin-bottom: 15px; border-left: 4px solid #3498db; padding-left: 10px; }
-.booking-card { display: flex; align-items: center; padding: 20px; background: #fff; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.coach-schedule-page {
+  padding: 32px;
+  animation: fadeInUp 0.4s ease-out;
+}
 
-.time-block { display: flex; flex-direction: column; align-items: center; min-width: 80px; border-right: 1px solid #eee; padding-right: 20px; margin-right: 20px; }
-.start-time { font-size: 1.2rem; font-weight: bold; color: #2c3e50; }
-.duration { font-size: 0.8rem; color: #888; }
+.coach-schedule-page h1 {
+  background: var(--coach-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
 
-.info-block { flex: 1; }
-.info-block h4 { margin: 0 0 5px 0; color: #2c3e50; }
-.member-info { margin: 0; color: #666; font-size: 0.9rem; }
+/* ===== Tabs ===== */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  background: rgba(0, 201, 255, 0.08);
+  padding: 6px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
 
-.ticket-status { padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-.ticket-status.confirmed { background: #dcfce7; color: #166534; }
-.ticket-status.cancelled { background: #fee2e2; color: #991b1b; }
-.ticket-status.completed { background: #dbeafe; color: #1e40af; }
-.btn-confirm { display: block; margin-top: 5px; padding: 5px 10px; background: #22c55e; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
-.btn-confirm:hover { background: #16a34a; }
+.tab {
+  background: none;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
+}
+
+.tab.active {
+  background: var(--coach-gradient);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 201, 255, 0.3);
+}
+
+.tab:not(.active):hover {
+  background: rgba(0, 201, 255, 0.1);
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* ===== Date Groups ===== */
+.date-group {
+  margin-bottom: 32px;
+}
+
+.date-header {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-left: 16px;
+  position: relative;
+  font-weight: 700;
+}
+
+.date-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--coach-gradient);
+  border-radius: 2px;
+}
+
+/* ===== Booking Card with Gradient Border ===== */
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-card {
+  position: relative;
+  padding: 3px;
+  background: var(--coach-gradient);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+}
+
+.booking-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: white;
+  border-radius: calc(var(--radius-lg) - 3px);
+  z-index: 1;
+}
+
+.booking-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.booking-card:hover {
+  transform: translateX(6px);
+  box-shadow: var(--coach-shadow);
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  padding: 20px;
+  border-right: 2px solid rgba(0, 201, 255, 0.15);
+}
+
+.start-time {
+  font-size: 1.3rem;
+  font-weight: 800;
+  background: var(--coach-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.duration {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.info-block {
+  flex: 1;
+  padding: 20px;
+}
+
+.info-block h4 {
+  margin: 0 0 6px 0;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.member-info {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.status-block {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* ===== Status Badges ===== */
+.ticket-status {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.ticket-status.pending {
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.15) 0%, rgba(230, 126, 34, 0.15) 100%);
+  color: #e67e22;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+.ticket-status.confirmed {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(39, 174, 96, 0.15) 100%);
+  color: #27ae60;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.ticket-status.cancelled {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.15) 100%);
+  color: #c0392b;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.ticket-status.completed {
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.15) 0%, rgba(41, 128, 185, 0.15) 100%);
+  color: #2980b9;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.ticket-status.expired {
+  background: linear-gradient(135deg, rgba(149, 165, 166, 0.15) 0%, rgba(127, 140, 141, 0.15) 100%);
+  color: #7f8c8d;
+  border: 1px solid rgba(149, 165, 166, 0.3);
+}
+
+.btn-confirm {
+  padding: 8px 16px;
+  background: var(--coach-gradient);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: all var(--transition-base);
+}
+
+.btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 201, 255, 0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .booking-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .time-block {
+    border-right: none;
+    border-bottom: 2px solid rgba(0, 201, 255, 0.15);
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .status-block {
+    align-items: flex-start;
+  }
+}
 </style>

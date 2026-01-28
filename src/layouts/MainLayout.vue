@@ -39,7 +39,7 @@
     <main class="main-content">
       <header class="top-bar">
         <div class="header-right">
-             <div class="lang-switch">
+             <div class="lang-switch" :data-role="authStore.userRole">
                 <button @click="switchLang('zh')" :class="{ active: locale === 'zh' }">中文</button>
                 <button @click="switchLang('en')" :class="{ active: locale === 'en' }">EN</button>
              </div>
@@ -272,8 +272,20 @@ const switchLang = (lang: string) => {
 
 .lang-switch button.active {
   background: white;
-  color: var(--member-primary);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Role-based active button colors */
+.lang-switch[data-role="MEMBER"] button.active {
+  color: #FF6B35;
+}
+
+.lang-switch[data-role="COACH"] button.active {
+  color: #00C9FF;
+}
+
+.lang-switch[data-role="ADMIN"] button.active {
+  color: #667EEA;
 }
 
 .lang-switch button:hover:not(.active) {

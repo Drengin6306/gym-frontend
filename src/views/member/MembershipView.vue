@@ -145,23 +145,238 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.membership-page { padding: 20px; }
-.section { margin-bottom: 40px; }
-.cards-grid, .types-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 15px; }
+/* 🏋️ Membership View - Member Orange Theme */
 
-.member-card, .type-card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-.member-card.active { border-left: 5px solid #2ecc71; }
+.membership-page {
+  padding: 32px;
+  animation: fadeInUp 0.4s ease-out;
+}
 
-.type-card h3, .member-card h3 { color: #2c3e50; margin-bottom: 10px; }
-.desc { color: #7f8c8d; margin-bottom: 15px; min-height: 40px; }
-.price { font-size: 1.2rem; font-weight: bold; color: #2980b9; margin-bottom: 15px; }
+.membership-page h1 {
+  background: var(--member-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
 
-.buy-btn, .pay-btn { width: 100%; padding: 10px; background: #3498db; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-.buy-btn:hover { background: #2980b9; }
-.pay-btn { background: #e67e22; }
+.section {
+  margin-bottom: 48px;
+}
 
-.badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; background: #95a5a6; color: #fff; margin-right: 5px; }
-.badge.active { background: #2ecc71; }
-.badge.expired { background: #e74c3c; }
-.badge.unpaid { background: #f1c40f; color: #333; }
+.section h2 {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 107, 53, 0.2);
+}
+
+.cards-grid, .types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 15px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-medium);
+  color: var(--text-secondary);
+}
+
+/* ===== Member Card with Gradient Border ===== */
+.member-card {
+  position: relative;
+  padding: 3px;
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.member-card.active {
+  background: var(--member-gradient);
+}
+
+.member-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: white;
+  border-radius: calc(var(--radius-lg) - 3px);
+  z-index: 1;
+}
+
+.member-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.member-card h3 {
+  padding: 20px 20px 0;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.member-card p {
+  padding: 0 20px;
+  margin: 8px 0;
+  color: var(--text-secondary);
+}
+
+.member-card .dates {
+  padding: 0 20px;
+}
+
+.member-card .dates p {
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.member-card .status {
+  padding: 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--member-shadow);
+}
+
+/* ===== Type Card with Gradient Border ===== */
+.type-card {
+  position: relative;
+  padding: 3px;
+  background: var(--member-gradient);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.type-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: white;
+  border-radius: calc(var(--radius-lg) - 3px);
+  z-index: 1;
+}
+
+.type-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.type-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--member-shadow);
+}
+
+.type-card h3 {
+  padding: 24px 24px 0;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.desc {
+  padding: 0 24px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  min-height: 50px;
+  line-height: 1.5;
+}
+
+.price {
+  padding: 0 24px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: var(--member-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* ===== Buttons ===== */
+.buy-btn, .pay-btn {
+  width: calc(100% - 48px);
+  margin: 0 24px 24px;
+  padding: 14px;
+  background: var(--member-gradient);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.buy-btn::before, .pay-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.buy-btn:hover::before, .pay-btn:hover::before {
+  left: 100%;
+}
+
+.buy-btn:hover, .pay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+.pay-btn {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+}
+
+/* ===== Badges ===== */
+.badge {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  color: #fff;
+}
+
+.badge.active {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.badge.expired {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.badge.unpaid {
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+  color: #333;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .cards-grid, .types-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

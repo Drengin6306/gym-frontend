@@ -121,26 +121,177 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.payment-history { padding: 20px; }
-.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-h1 { margin: 0; color: #2c3e50; }
+/* 🏋️ Payment History - Member Orange Theme */
 
-.stats-card { background: #3498db; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; }
-.stats-card .highlight { font-size: 1.2em; margin-left: 10px; color: #fff; }
+.payment-history {
+  padding: 32px;
+  animation: fadeInUp 0.4s ease-out;
+}
 
-.glass-panel { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
 
-.data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-.data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
-.data-table th { background: #f8f9fa; font-weight: 600; color: #7f8c8d; }
+h1 {
+  margin: 0;
+  background: var(--member-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+}
 
-.mono { font-family: monospace; }
-.amount { font-weight: bold; color: #e67e22; }
+/* ===== Stats Card with Gradient ===== */
+.stats-card {
+  background: var(--member-gradient);
+  color: white;
+  padding: 16px 28px;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--member-shadow);
+  position: relative;
+  overflow: hidden;
+}
 
-.status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
-.status-badge.success { background: #e8f8f5; color: #2ecc71; }
-.status-badge.pending { background: #fef9e7; color: #f39c12; }
-.status-badge.fail { background: #fdedec; color: #e74c3c; }
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 3s infinite;
+}
 
-.loading, .empty { padding: 40px; text-align: center; color: #999; }
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.stats-card .highlight {
+  font-size: 1.5em;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ===== Glass Panel ===== */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+/* ===== Data Table ===== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.data-table th {
+  padding: 16px;
+  text-align: left;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(247, 147, 30, 0.08) 100%);
+  font-weight: 700;
+  color: var(--text-secondary);
+  border-bottom: 2px solid rgba(255, 107, 53, 0.2);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.data-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  transition: all var(--transition-base);
+}
+
+.data-table tbody tr {
+  transition: all var(--transition-base);
+}
+
+.data-table tbody tr:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.04) 0%, rgba(247, 147, 30, 0.04) 100%);
+  transform: translateX(4px);
+}
+
+.mono {
+  font-family: 'SF Mono', 'Consolas', monospace;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ===== Amount with Gradient ===== */
+.amount {
+  font-weight: 800;
+  background: var(--member-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.1rem;
+}
+
+/* ===== Status Badges ===== */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  display: inline-block;
+}
+
+.status-badge.success {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(39, 174, 96, 0.15) 100%);
+  color: #27ae60;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.status-badge.pending {
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.15) 0%, rgba(230, 126, 34, 0.15) 100%);
+  color: #e67e22;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+.status-badge.fail {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.15) 100%);
+  color: #c0392b;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.loading, .empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .data-table {
+    font-size: 0.9rem;
+  }
+
+  .data-table th, .data-table td {
+    padding: 12px 8px;
+  }
+}
 </style>

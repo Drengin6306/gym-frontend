@@ -100,19 +100,247 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.my-students-page { padding: 20px; }
-.student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
-.student-card { background: #fff; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-.avatar-placeholder { width: 60px; height: 60px; background: #e0f2fe; color: #0284c7; border-radius: 50%; line-height: 60px; font-size: 1.5rem; font-weight: bold; margin: 0 auto 15px; }
-.btn-history { margin-top: 15px; padding: 8px 16px; background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; border-radius: 6px; cursor: pointer; }
-.btn-history:hover { background: #e0f2fe; }
+/* 🏋️ My Students - Coach Cyan-Green Theme */
 
-/* Modal */
-.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-.modal { background: #fff; padding: 25px; border-radius: 12px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
-.history-list { margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
-.history-item { display: flex; justify-content: space-between; padding: 10px; background: #f9fafb; border-radius: 6px; font-size: 0.9rem; }
-.history-item .status.confirmed { color: #16a34a; }
-.history-item .status.cancelled { color: #dc2626; }
-.btn-close { width: 100%; padding: 10px; background: #f3f4f6; border: none; border-radius: 6px; cursor: pointer; }
+.my-students-page {
+  padding: 32px;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.my-students-page h1 {
+  background: var(--coach-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* ===== Student Grid ===== */
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* ===== Student Card with Gradient Border ===== */
+.student-card {
+  position: relative;
+  padding: 3px;
+  background: var(--coach-gradient);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.student-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: white;
+  border-radius: calc(var(--radius-lg) - 3px);
+  z-index: 1;
+}
+
+.student-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.student-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--coach-shadow);
+}
+
+.student-card h3 {
+  text-align: center;
+  padding: 0 20px;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.student-card p {
+  text-align: center;
+  padding: 0 20px;
+  margin: 6px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.avatar-placeholder {
+  width: 70px;
+  height: 70px;
+  background: var(--coach-gradient);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 20px auto 15px;
+  box-shadow: 0 8px 20px rgba(0, 201, 255, 0.3);
+}
+
+.btn-history {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.15) 0%, rgba(146, 254, 157, 0.15) 100%);
+  color: #00b894;
+  border: 2px solid rgba(0, 201, 255, 0.3);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.3px;
+  transition: all var(--transition-base);
+}
+
+.btn-history:hover {
+  background: var(--coach-gradient);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+}
+
+.modal {
+  position: relative;
+  background: #fff;
+  padding: 0;
+  border-radius: var(--radius-xl);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--coach-gradient);
+}
+
+.modal h3 {
+  padding: 30px 25px 0;
+  margin: 0;
+  background: var(--coach-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.3rem;
+}
+
+.history-list {
+  margin: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mini-empty {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-secondary);
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.05) 0%, rgba(146, 254, 157, 0.05) 100%);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-base);
+}
+
+.history-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(0, 201, 255, 0.3);
+}
+
+.history-item .date {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.history-item .program {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.history-item .status {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.history-item .status.confirmed { color: #27ae60; }
+.history-item .status.cancelled { color: #e74c3c; }
+.history-item .status.completed { color: #3498db; }
+.history-item .status.pending { color: #f39c12; }
+
+.btn-close {
+  width: calc(100% - 50px);
+  margin: 0 25px 25px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.1) 0%, rgba(146, 254, 157, 0.1) 100%);
+  color: #00b894;
+  border: 2px solid rgba(0, 201, 255, 0.3);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all var(--transition-base);
+}
+
+.btn-close:hover {
+  background: var(--coach-gradient);
+  color: white;
+  border-color: transparent;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .student-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
